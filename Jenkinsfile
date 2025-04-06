@@ -39,4 +39,4 @@ post {
             sh(script: 'docker compose down')
         }
     }
-// This Jenkinsfile is for a simple CI/CD pipeline that builds a Docker image, starts the application, and runs tests.
+// ThisJenkinsfile is for a simple CI/CD pipeline that builds a Docker image, starts the application, and runs tests.

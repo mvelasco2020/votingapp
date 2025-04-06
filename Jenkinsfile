@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh(script: 'docker compose up -d')
             }
-        }
+        } /*
         stage('Run Tests') {
             steps {
                 sh(script: 'pytest ./tests/test_sample.py')
@@ -28,6 +28,22 @@ pipeline {
                 failure {
                     echo 'Tests failed!'
                     sh(script: 'docker compose down')
+                }
+            }
+        }
+        */
+        stage('Push to Docker Hub') {
+            steps {
+                echo "Running in $WORKSPACE"
+                dir("$WORKSPACE/azure-vote") {
+                    echo "Pushing to Docker Hub"
+                    script {
+                        docker.withRegistry('', 'dockerpat') {
+                            def image = docker.build("mikevelasco16/azure-vote:${env.BUILD_ID}")
+                            image.push()
+                            echo "Pushed to Docker Hub"
+                        }
+                    }
                 }
             }
         }

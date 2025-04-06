@@ -17,9 +17,13 @@ pipeline {
                 sh(script: 'docker compose up -d')
             }
         }
-        stage('install pytest') {
+        stage('Install Python and Pytest') {
             steps {
-                sh(script: 'pip install pytest')
+                sh(script: '''
+                    sudo apt-get update
+                    sudo apt-get install -y python3 python3-pip
+                    pip3 install pytest
+                ''')
             }
         }
         stage('Run Tests') {

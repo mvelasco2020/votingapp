@@ -12,6 +12,11 @@ pipeline {
                     sh(script: 'docker compose build')
             }
         }
+        stage('Shutdown Container') {
+            steps {
+                sh(script: 'docker compose down')
+            }
+        }
         stage('Start Application') {
             steps {
                 sh(script: 'docker compose up -d')

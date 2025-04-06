@@ -17,9 +17,14 @@ pipeline {
                 sh(script: 'docker compose up -d')
             }
         }
+        stage('install pytest') {
+            steps {
+                sh(script: 'pip install pytest')
+            }
+        }
         stage('Run Tests') {
             steps {
-                sh 'python ./tests/test_sample.py'
+                sh(script: 'pytest ./tests/test_sample.py')
             }
             post {
                 success {

@@ -43,7 +43,7 @@ pipeline {
                 dir("$WORKSPACE/azure-vote") {
                     echo "Pushing to Docker Hub"
                     script {
-                        docker.withRegistry('', 'dockerpat') {
+                        docker.withRegistry('', 'dockerpat2') {
                             def image = docker.build("mikevelasco16/azure-vote:${env.BUILD_ID}")
                             image.push()
                             echo "Pushed to Docker Hub"
